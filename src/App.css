@@ -28,15 +28,13 @@
 
   .main-content {
     flex-direction: column;
-    row-gap: 1.25rem;
+    gap: 1rem;
   }
 
-  .main-content .field {
-    margin-bottom: 0.25rem;
-  }
-
+  .main-content .field,
   .main-content .bench {
-    margin-top: 0.5rem;
+    flex: none;
+    width: 100%;
   }
 }
 

@@ -100,3 +100,16 @@
 .player-wrapper.dragging {
   opacity: 0.9;
 }
+
+@media (max-width: 768px) {
+  .field {
+    flex: none;
+    width: 100%;
+  }
+
+  .field-container {
+    aspect-ratio: 3 / 2;
+    padding-bottom: 0;
+    min-height: 180px;
+  }
+}
