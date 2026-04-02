@@ -19,15 +19,22 @@
   max-width: 1400px;
   margin: 0 auto;
   flex-wrap: wrap;
+  align-items: flex-start;
 }
 
 @media (max-width: 768px) {
+  .app-container {
+    padding: 1rem;
+  }
+
   .app-container h1 {
-    font-size: 2rem;
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
   }
 
   .main-content {
     flex-direction: column;
+    gap: 1rem;
   }
 }
 

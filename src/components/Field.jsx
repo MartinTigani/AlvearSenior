@@ -4,24 +4,17 @@ import './Field.css'
 
 function Field({ players, onDragEnd, onRemovePlayer }) {
   const [draggingId, setDraggingId] = useState(null)
-  const [offset, setOffset] = useState({ x: 0, y: 0 })
 
   const handleMouseDown = (e, playerId) => {
     setDraggingId(playerId)
-    const rect = e.currentTarget.parentElement.getBoundingClientRect()
-    setOffset({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top
-    })
   }
 
-  const handleMouseMove = (e) => {
-    if (!draggingId) return
+  const movePlayer = (clientX, clientY, fieldElement) => {
+    if (!draggingId || !fieldElement) return
 
-    const field = e.currentTarget
-    const rect = field.getBoundingClientRect()
-    let x = ((e.clientX - rect.left) / rect.width) * 100
-    let y = ((e.clientY - rect.top) / rect.height) * 100
+    const rect = fieldElement.getBoundingClientRect()
+    let x = ((clientX - rect.left) / rect.width) * 100
+    let y = ((clientY - rect.top) / rect.height) * 100
 
     // Limitar posición dentro del campo
     x = Math.max(5, Math.min(95, x))
@@ -33,7 +26,29 @@ function Field({ players, onDragEnd, onRemovePlayer }) {
     }
   }
 
+  const handleMouseMove = (e) => {
+    movePlayer(e.clientX, e.clientY, e.currentTarget)
+  }
+
+  const handleTouchMove = (e) => {
+    if (!draggingId) return
+    const touch = e.touches[0]
+    if (!touch) return
+    e.preventDefault()
+    movePlayer(touch.clientX, touch.clientY, e.currentTarget)
+  }
+
   const handleMouseUp = () => {
+    setDraggingId(null)
+  }
+
+  const handleTouchStart = (e, playerId) => {
+    const touch = e.touches[0]
+    if (!touch) return
+    setDraggingId(playerId)
+  }
+
+  const handleTouchEnd = () => {
     setDraggingId(null)
   }
 
@@ -56,6 +71,9 @@ function Field({ players, onDragEnd, onRemovePlayer }) {
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+      onTouchCancel={handleTouchEnd}
     >
       <h2>Cancha</h2>
       <div className="field-container">
@@ -75,6 +93,7 @@ function Field({ players, onDragEnd, onRemovePlayer }) {
               top: `${player.y}%`,
             }}
             onMouseDown={e => handleMouseDown(e, player.id)}
+            onTouchStart={e => handleTouchStart(e, player.id)}
           >
             <Player
               player={player}
