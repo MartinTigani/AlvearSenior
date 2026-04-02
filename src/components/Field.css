@@ -1,0 +1,102 @@
+.field {
+  flex: 2;
+  background: white;
+  border-radius: 15px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.field h2 {
+  margin-top: 0;
+  color: #333;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.field-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 66.66%;
+  background: linear-gradient(to bottom, #1a8339 0%, #2d5a3d 50%, #1a8339 100%);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 3px solid #fff;
+  cursor: grab;
+}
+
+.field-container:active {
+  cursor: grabbing;
+}
+
+/* Línea central */
+.field-center-line {
+  position: absolute;
+  width: 2px;
+  height: 100%;
+  left: 50%;
+  top: 0;
+  background: white;
+  transform: translateX(-50%);
+}
+
+/* Círculo central */
+.field-circle {
+  position: absolute;
+  width: 15%;
+  height: 30%;
+  border: 2px solid white;
+  border-radius: 50%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.field-circle::after {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: white;
+  border-radius: 50%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Áreas de gol */
+.field-goal-area {
+  position: absolute;
+  width: 20%;
+  height: 40%;
+  border: 2px solid white;
+  top: 30%;
+}
+
+.field-goal-area.left {
+  left: 0;
+}
+
+.field-goal-area.right {
+  right: 0;
+}
+
+/* Jugadores */
+.player-wrapper {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  cursor: grab;
+  z-index: 10;
+  transition: z-index 0.2s;
+}
+
+.player-wrapper.dragging {
+  z-index: 100;
+}
+
+.player-wrapper:hover {
+  z-index: 20;
+}
+
+.player-wrapper.dragging {
+  opacity: 0.9;
+}
