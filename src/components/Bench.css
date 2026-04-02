@@ -236,14 +236,42 @@
   }
 
   .bench-player {
-    flex-direction: column;
-    text-align: center;
-    border-left: none;
-    border-top: 4px solid #667eea;
+    flex-direction: row;
+    text-align: left;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.45rem;
+    border-left: 4px solid #667eea;
+    border-top: none;
+  }
+
+  .bench-player-icon {
+    font-size: 0.95rem;
+    width: 24px;
+    height: 24px;
+  }
+
+  .add-btn {
+    width: 26px;
+    height: 26px;
+    font-size: 0.8rem;
+  }
+
+  .bench-player-name {
+    font-size: 0.72rem;
+  }
+
+  .bench-player-position {
+    font-size: 0.7rem;
+  }
+
+  .bench-player-info {
+    flex: 1;
   }
 
   .bench-player:hover {
-    transform: translateY(-5px);
+    transform: none;
+    box-shadow: none;
   }
 
   .position-modal-content {
